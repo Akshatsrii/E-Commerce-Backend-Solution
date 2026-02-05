@@ -1,0 +1,35 @@
+<%- include("../partials/header") %>
+
+<h2>Products</h2>
+
+<form method="GET">
+  <input name="search" placeholder="Search" value="<%= search || '' %>">
+
+  <select name="category">
+    <option value="">All Categories</option>
+    <% categories.forEach(c => { %>
+      <option value="<%= c %>" <%= category === c ? "selected" : "" %>><%= c %></option>
+    <% }) %>
+  </select>
+
+  <select name="sort">
+    <option value="">Newest</option>
+    <option value="price_asc" <%= sort==="price_asc"?"selected":"" %>>Price ↑</option>
+    <option value="price_desc" <%= sort==="price_desc"?"selected":"" %>>Price ↓</option>
+    <option value="name" <%= sort==="name"?"selected":"" %>>Name</option>
+  </select>
+
+  <button>Filter</button>
+</form>
+
+<hr>
+
+<% products.forEach(p => { %>
+  <div>
+    <h3><%= p.name %></h3>
+    <p>₹<%= p.price %></p>
+    <a href="/products/<%= p._id %>">View</a>
+  </div>
+<% }) %>
+
+<%- include("../partials/footer") %>

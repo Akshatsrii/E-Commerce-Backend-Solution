@@ -1,0 +1,21 @@
+<%- include("partials/header") %>
+
+
+<h2>Your Cart</h2>
+
+<% if (cart.items.length === 0) { %>
+  <p>Cart is empty</p>
+<% } %>
+
+<% cart.items.forEach(i => { %>
+  <div>
+    <p><%= i.product.name %> x <%= i.quantity %></p>
+    <p>₹<%= i.price * i.quantity %></p>
+  </div>
+<% }) %>
+
+<p>Total: ₹<%= cart.total %></p>
+
+<a href="/checkout">Checkout</a>
+
+<%- include("../partials/footer") %>

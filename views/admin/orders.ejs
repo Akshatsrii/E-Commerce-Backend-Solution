@@ -1,0 +1,64 @@
+<%- include("../partials/header") %>
+
+<div class="container section">
+
+    <div class="section-header">
+        <h2 class="section-title">Orders</h2>
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% orders.forEach(o => { %>
+
+                    <tr>
+
+                        <td>
+                            <strong><%= o.user?.name || "Unknown" %></strong>
+                        </td>
+
+                        <td>
+                            ₹<%= o.totalAmount %>
+                        </td>
+
+                        <td>
+
+                            <% if (o.status === "completed") { %>
+                                <span class="badge badge-success">Completed</span>
+                            <% } else if (o.status === "pending") { %>
+                                <span class="badge badge-warning">Pending</span>
+                            <% } else { %>
+                                <span class="badge badge-danger"><%= o.status %></span>
+                            <% } %>
+
+                        </td>
+
+                        <td>
+                            <%= new Date(o.createdAt).toLocaleDateString() %>
+                        </td>
+
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<%- include("../partials/footer") %>

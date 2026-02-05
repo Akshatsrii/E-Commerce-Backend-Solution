@@ -1,0 +1,37 @@
+<nav class="navbar">
+  <div class="container navbar-container">
+
+    <a href="/" class="navbar-brand">E-Commerce</a>
+
+    <ul class="navbar-menu">
+      <li><a href="/" class="navbar-link">Home</a></li>
+      <li><a href="/products" class="navbar-link">Products</a></li>
+    </ul>
+
+    <div class="navbar-actions">
+
+      <a href="/cart" class="cart-icon">
+        🛒
+        <span class="cart-count"><%= cart.items.length %></span>
+      </a>
+
+      <% if (user) { %>
+        <span class="navbar-link">Hello, <%= user.name %></span>
+
+        <% if (user.role === "admin") { %>
+          <a href="/admin/dashboard" class="btn btn-secondary btn-sm">Admin</a>
+        <% } %>
+
+        <a href="/logout" class="btn btn-outline btn-sm">Logout</a>
+
+      <% } else { %>
+
+        <a href="/login" class="btn btn-outline btn-sm">Login</a>
+        <a href="/register" class="btn btn-primary btn-sm">Register</a>
+
+      <% } %>
+
+    </div>
+
+  </div>
+</nav>

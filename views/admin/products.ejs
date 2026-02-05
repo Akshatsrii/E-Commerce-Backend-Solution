@@ -1,0 +1,70 @@
+<%- include("../partials/header") %>
+
+<div class="container section">
+
+    <div class="section-header flex justify-between items-center">
+        <h2 class="section-title">Manage Products</h2>
+
+        <a href="/admin/products/new" class="btn btn-primary">
+            + Add Product
+        </a>
+    </div>
+
+    <% if (products.length === 0) { %>
+
+        <p class="text-center mt-3">No products found</p>
+
+    <% } %>
+
+    <div class="products-grid">
+
+        <% products.forEach(p => { %>
+
+            <div class="card">
+
+                <% if (p.image) { %>
+                    <img src="<%= p.image %>" class="card-img">
+                <% } %>
+
+                <div class="card-body">
+
+                    <h3 class="card-title"><%= p.name %></h3>
+
+                    <p class="card-text">
+                        <%= p.description ? p.description.substring(0, 80) : "No description" %>
+                    </p>
+
+                    <p class="card-price">
+                        ₹<%= p.price %>
+                    </p>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <a href="/admin/products/edit/<%= p._id %>" 
+                       class="btn btn-outline btn-sm">
+                       Edit
+                    </a>
+
+                    <form action="/api/admin/products/<%= p._id %>?_method=DELETE" 
+                          method="POST"
+                          onsubmit="return confirm('Delete this product?')">
+
+                        <button class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</div>
+
+<%- include("../partials/footer") %>
